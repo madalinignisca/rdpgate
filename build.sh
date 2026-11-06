@@ -14,11 +14,12 @@ VERSION=${2:-0.0.0}
 ARCH=${ARCH:-$(uname -m)}
 APP="RDPGate.app"
 
-# Under the GitHub owner's namespace, so it is globally unique. The keychain
-# service names (local.rdpgate, local.rdpgate.identity) deliberately do not
-# follow it: they predate this ID, and renaming them would orphan every saved
-# password.
-BUNDLE_ID="io.github.madalinignisca.rdpgate"
+# Under a domain the author owns, not a hosting provider's: the bundle ID is
+# the app's identity for as long as it exists, and moving the code elsewhere
+# must not change it. The keychain service names (local.rdpgate,
+# local.rdpgate.identity) deliberately do not follow it: they predate this ID,
+# and renaming them would orphan every saved password.
+BUNDLE_ID="me.madalin.rdpgate"
 
 echo "==> swift build -c $CONFIG --arch $ARCH"
 swift build -c "$CONFIG" --arch "$ARCH"

@@ -28,7 +28,7 @@ VERSION=${1:-}
 ARCH=${ARCH:-$(uname -m)}
 APP="RDPGate.app"
 BIN="$APP/Contents/MacOS/RDPGate"
-BUNDLE_ID="io.github.madalinignisca.rdpgate"   # the cask's `uninstall quit:` relies on it
+BUNDLE_ID="me.madalin.rdpgate"   # the cask's `uninstall quit:` relies on it
 DIST="dist"
 FINAL="$DIST/RDPGate-$VERSION-$ARCH.zip"
 
