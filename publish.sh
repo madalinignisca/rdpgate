@@ -40,6 +40,13 @@ TAPDIRT=$(git -C "$RDPGATE_TAP_DIR" status --porcelain)
 SHA=$(shasum -a 256 "$ZIP" | cut -d' ' -f1)
 NAME=$(basename "$ZIP")
 
+# Release notes are the version's CHANGELOG.md section: from its "## X.Y.Z"
+# heading up to the next "## ". Checked before anything is pushed, so a release
+# can't go out with no notes. They can still be edited on GitHub afterwards.
+NOTES=$(awk -v h="## $VERSION" '$0==h{f=1;next} f&&/^## /{exit} f' CHANGELOG.md)
+[[ -n ${NOTES//[[:space:]]/} ]] || die "CHANGELOG.md has no '## $VERSION' section"
+NOTES+=$'\n\n'"Install or upgrade: \`brew install --cask madalinignisca/rdpgate/rdpgate\`"
+
 echo "==> push branch"
 # Before the tag, so the released commit is on a branch on GitHub, not only
 # reachable through the tag.
@@ -59,7 +66,7 @@ echo "==> GitHub release"
 # (the asset check below still decides whether the tap may be updated).
 if ! gh release view "v$VERSION" >/dev/null 2>&1; then
   gh release create "v$VERSION" "$ZIP" --verify-tag --title "RDPGate $VERSION" \
-    --notes "Install or upgrade: \`brew install --cask madalinignisca/rdpgate/rdpgate\`"
+    --notes "$NOTES"
 fi
 # A previous run may have created the release but failed the upload. Upload
 # only when the asset is missing — never --clobber an existing one, since a

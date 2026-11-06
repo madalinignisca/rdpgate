@@ -143,6 +143,9 @@ Environment:
 - `RDPGATE_NOTARY_PROFILE` — a profile created once with `xcrun notarytool store-credentials`
 - `RDPGATE_TAP_DIR` — a clone of `madalinignisca/homebrew-rdpgate`
 
+Before publishing, add a `## X.Y.Z` section to `CHANGELOG.md`: it becomes the
+GitHub release notes, and `publish.sh` refuses a version without one.
+
 Released versions are immutable: never rebuild or re-upload an existing version,
 bump the patch number instead.
 
