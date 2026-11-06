@@ -1,0 +1,11 @@
+# Build output
+.build/
+RDPGate.app/
+dist/
+*.zip
+
+# Local working notes and session logs — never published
+.dev/
+.remember/
+
+.DS_Store

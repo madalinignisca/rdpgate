@@ -1,0 +1,8 @@
+RDPGate
+Copyright 2026 RDPGate contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+RDPGate launches FreeRDP (https://www.freerdp.com/), which is licensed under the
+Apache License, Version 2.0. FreeRDP is not distributed with RDPGate; it is
+installed separately, for example by Homebrew.
